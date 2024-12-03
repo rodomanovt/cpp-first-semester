@@ -1,0 +1,2 @@
+cd "c:\Users\Timofey\cpp_files\" ; if ($?) { g++ spinners.cpp -o spinners } ; if ($?) { .\spinners }
+fdgfjd 4680
