@@ -31,6 +31,8 @@ void one()
     fin.close();
 }
 
+// ^^^^^^^ 1 номер ^^^^^^^
+// vvvvvvv 2 номер vvvvvvv
 
 int sign(float x)
 {
@@ -53,6 +55,8 @@ void two()
     cout << sign(x);
 }
 
+// ^^^^^^^ 2 номер ^^^^^^^
+// vvvvvvv 3 номер vvvvvvv
 
 void rectangle()
 {
@@ -126,6 +130,10 @@ void three()
 }
 
 
+// ^^^^^^^ 3 номер ^^^^^^^
+// vvvvvvv 4 номер vvvvvvv
+
+
 void four()
 {
     for (int r = 0; r <= 4; r++)
@@ -150,6 +158,8 @@ void four()
     }
 }
 
+// ^^^^^^^ 4 номер ^^^^^^^
+// vvvvvvv 5 номер vvvvvvv
 
 void five()
 {
@@ -186,8 +196,10 @@ void five()
     }
 }
 
+// ^^^^^^^ 5 номер ^^^^^^^
+// vvvvvvv 6 номер vvvvvvv
 
-bool valid_rim(string rim){
+bool valid_rim(string rim){ // работает не во всех случаях
     bool flag = true;
     vector<string> forbidden = {"IIII", "VV", "XXXX", "LL", "CCCC", "DD", "MMMM", "IIX", "IIV", "IIL", 
     "XXL", "IIC", "XXC", "IID", "XXD", "CCD",
@@ -269,6 +281,8 @@ void six()
     }
 }
 
+// ^^^^^^^ 6 номер ^^^^^^^
+// vvvvvvv 7 номер vvvvvvv
 
 int gen(int s, int m, int i, int c){
     if (s == 1){
@@ -290,15 +304,8 @@ void seven()
     }
 }
 
-void printMatrix(vector<vector<float>>& m){
-    for (int i = 0; i < m.size(); i++){
-        for (int j = 0; j < m[i].size(); j++){
-            cout << m[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
+// ^^^^^^^ 7 номер ^^^^^^^
+// vvvvvvv 8 номер vvvvvvv
 
 void eight()
 {
@@ -314,13 +321,11 @@ void eight()
     vector<vector<float>> C(A.size(), vector<float>(B[0].size(), 0));
     for (int i = 0; i < C.size(); i++){
         for (int j = 0; j < C.size(); j++){
-            //C[i][j] = A[i][0]*B[0][j] + A[i][1]*B[1][j] + A[i][2]*B[2][j] + A[i][3]*B[3][j];
             for (int k = 0; k < B.size(); k++){
                 C[i][j] = C[i][j] + A[i][k]*B[k][j];
             }
         }
     }
-    //printMatrix(C);
     cout << "1) ";
     float first = C[0][0]+C[0][1];
     float second = C[1][0]+C[1][1];
@@ -419,6 +424,8 @@ void eight()
     cout << summa << endl;
 }
 
+// ^^^^^^^ 8 номер ^^^^^^^
+// vvvvvvv 9 номер vvvvvvv
 
 bool valid_notation(string num, int notation){
     int min_valid_notation = 17;
@@ -574,8 +581,11 @@ void nine()
     }
 }
 
+// ^^^^^^^ 9 номер ^^^^^^^
+// vvvvvvv запуск vvvvvvv
+
 int main()
 {
-    six();
+    six(); // для запуска нужного номера вызываете функцию с названием номера (one, two, ... nine)
     return 0;
 }

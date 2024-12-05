@@ -41,8 +41,8 @@ void plotGraph(int accuracy, vector<vector<string>>& plane, int radius, int scal
 
 int main() {
     int radius = 21;
-    int accuracy = 3;
-    int scale = 2;
+    int accuracy = 2;
+    int scale = 1;
     vector<vector<string>> plane(radius, vector<string>(radius, "."));
     vector<vector<string>> axis(createAxis(plane, radius));
     plotGraph(accuracy, axis, radius, scale);
