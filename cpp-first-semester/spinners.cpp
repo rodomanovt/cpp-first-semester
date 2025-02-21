@@ -3,13 +3,6 @@
 using namespace std;
 
 
-void print_vector(vector<auto> arr){
-    for (auto el: arr){
-        cout << el << "; ";
-    }
-    cout << endl;
-}
-
 void one(){
     int a, b, c;
     cin >> a;
@@ -48,7 +41,8 @@ void three(){
     int cnt = 0;
     for (int a = 1; a <= n; a++){
         for (int b = 1; b <= m; b++){
-            // посчитать кол-во возможных расположений левого верхнего угла так, чтобы прямоугольник a x b не выходил за границы n x m
+            // посчитать кол-во возможных расположений левого верхнего угла так, чтобы 
+            //прямоугольник a x b не выходил за границы n x m
             cnt += (n-a+1) * (m-b+1);
         }
     }

@@ -8,6 +8,8 @@
 using namespace std;
 
 
+// vvvvvvv 1 номер vvvvvvv
+
 void one()
 {
     ofstream fout("4-1.txt");
