@@ -6,54 +6,52 @@
 #include <unordered_set>
 #include <random>
 #include <chrono>
-#include <format>
 using namespace std;
 
 
 int algorithm(int n, int& C, int& M, bool reqDetaliedSolution){
     int cnt = 0; // счетчик чисел, подходящих под условие задачи
-    for (int x = 1; x <= n; x++){
-        C += 1;
-        if(reqDetaliedSolution) cout << "Рассмотрим число " << x << endl;
+    for (int x = 1; x <= n; x++){ // цикл выполнится n раз
+        M += 1;
+
+        if(reqDetaliedSolution) cout << "Рассмотрим число " << x << endl;//
 
         unordered_set<char> seen = {};
-        string sx = "";
-        for (char c : to_string(x)){
+        for (char c : to_string(x)){ // проходим по цифрам числа (log10(n) операций)
 
             C += 1;
-            if (c != '0'){
-                seen.insert(c); // собираем сет чаров
+            if (c != '0'){ // 1 действие
+                seen.insert(c); // собираем сет чаров с цифрами (1 действие)
                 M += 1;
             }
         }
-        for (char c: seen){
-            sx += c; // собираем строку c нужными цифрами
-            M += 1;
-            
-        }
-        if (reqDetaliedSolution) cout << "его ненулевые цифры:" << sx << endl;
 
         cnt += 1; // всегда увеличиваем на 1; если число не подойдет под условие, отнимем 1
-        for (char c : sx){
-            int ci = c - '0'; // перевод чара в инт через таблицу аскии
+        for (char c : seen){ // проход по цифрам (log10(n) операций)
+            int ci = c - '0'; // перевод чара в инт через таблицу аскии (1 действие)
 
             C += 1;
-            if (x % ci != 0){
-                if (reqDetaliedSolution) cout << "число не поделилось на цифру " << ci << endl;
-                cnt -= 1; // отнимаем 1, если число не подошло (см на 5 строчек выше)
-                break; // если число не поделилось на какую-то цифру то скип
+            if (x % ci != 0){ // 1 действие
+                
+                if (reqDetaliedSolution) cout << "число не поделилось на цифру " << ci << endl;//
+
+                cnt -= 1; // отнимаем 1, если число не подошло (см на 5 строчек выше) (1 действие)
+                break; // если число не поделилось на какую-то цифру то не рассматриваем его дальше
             }
             
         }
-        if (reqDetaliedSolution)
-        if (reqDetaliedSolution) cout << "счетчик: " << cnt << "\n__________________" << endl;
+        
+        if (reqDetaliedSolution) cout << "счетчик: " << cnt << "\n__________________" << endl;//
 
     }
     return cnt;
 }
 
+// итого 2n действий по log10(n) раз
+// Ответ: nlogn
+
 int main(){
-    cout << "Практическая работа №1. 'Теоретическая сложность алгоритма'. Родоманов Тимофей " << endl;
+    cout << "Практическая работа №1. 'Теоретическая сложность алгоритма'." << endl;
     cout << "Выберите способ ввода числа:" << endl;
     cout << "1) Вручную" << endl;
     cout << "2) Случайное число от 1 до 1 000 000" << endl;
@@ -83,7 +81,6 @@ int main(){
 
     cout << "Результат: " << result << endl;
     cout << C << " сравнений, " << M << " перемещений, C + M = " << C+M << endl;;
-    //cout << format("Время работы алгоритма: {:8} секунд", end_timing-start_timing);
     cout << "Время работы программы: " << duration.count();
     return 0;
 }
