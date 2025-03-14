@@ -61,7 +61,7 @@ void merge(int* arr, int left, int mid, int right, uint64_t& C, uint64_t M){
 	for (int i = 0; i < lsize; i++){ // копируем данные в подмассивы
 		larr[i] = arr[left+i];
 	}
-	for (int i = 0; i < lsize; i++){
+	for (int i = 0; i < rsize; i++){
 		rarr[i] = arr[mid+1+i];
 	}
 
@@ -107,36 +107,32 @@ void mergeSort(int* arr, int left, int right, uint64_t& C, uint64_t& M){
 }
 
 
-void naturalMergeSort(int* arr, uint64_t size, uint64_t& C, uint64_t& M){ // НЕ РАБОТАЕТ
-	while (true){
-		bool sorted = true;
+void naturalMergeSort(int* arr, uint64_t size, uint64_t& C, uint64_t& M){
+	int* temp = new int[size];
 
-		int start = 0;
+    // // Находим адаптированные длины подмассивов
+    // int start = 0; // начало подмассива
+    // while (start < size) {
+    //     int end = start;
+    //     while (end + 1 < size && arr[end] <= arr[end + 1]) { // продолжает ли текущее значение быть <= следующего
+    //         end++;
+    //     }
 
-		while (start < size){
-			int end = start;
-			while (end + 1 < size && arr[end] <= arr[end+1]){
-				end += 1;
-			}
+    //     // Теперь у нас есть подмассив arr[start..end]
+    //     start = end + 1;
+    // }
 
-			if (end == size-1){
-				break;
-			}
-
-			sorted = false;
-
-			int nextStart = end+1;
-			while (nextStart < size && arr[nextStart] >= arr[nextStart-1]){
-				nextStart += 1;
-			}
-
-			merge(arr, start, end, nextStart-1, C, M);
-			start = nextStart;
-		}
-		if (sorted){
-			break;
-		}
-	}
+    // Поочередное слияние
+    for (uint64_t s = 1; s < size; s *= 2) {
+        for (uint64_t leftStart = 0; leftStart < size - 1; leftStart += 2 * s) {
+            int middle = min(leftStart + s - 1, size - 1);
+            int rightEnd = min((leftStart + 2 * s - 1), (size - 1));
+            if (middle < rightEnd) {
+                merge(arr, leftStart, middle, rightEnd, C, M);
+            }
+        }
+    }
+	delete[] temp;
 }
 
 
@@ -178,36 +174,36 @@ void printArray(int* arr, uint64_t size) {
 }
 
 int main(){
-	// int size = 10;
-	// int* arr = new int[size];
-	// uint64_t C = 0; 
-	// uint64_t M = 0;
-	// fillArray(arr, size);
-	// printArray(arr, size);
-	// //mergeSort(arr, 0, size-1, C, M);
-	// naturalMergeSort(arr, size, C, M);
-	// printArray(arr, size);
-	// delete[] arr;
+	int size = 10;
+	int* arr = new int[size];
+	uint64_t C = 0; 
+	uint64_t M = 0;
+	fillArray(arr, size);
+	printArray(arr, size);
+	//mergeSort(arr, 0, size-1, C, M);
+	naturalMergeSort(arr, size, C, M);
+	printArray(arr, size);
+	delete[] arr;
 
 
 	//Sleep(5000);
-	for (uint64_t size = 100'000; size <= 500'000; size += 100'000){
-		size = 10; // REMOVE
-		cout << "size = " << size << endl;
-		int* arr1 = new int[size], * arr2 = NULL, * arr3 = NULL, * arr4 = NULL;
-		fillArray(arr1, size);
-		arr2 = copyArray(arr1, size);
-		arr3 = copyArray(arr1, size);
-		arr4 = copyArray(arr1, size);
+	// for (uint64_t size = 100'000; size <= 500'000; size += 100'000){
+	// 	size = 10; // REMOVE
+	// 	cout << "size = " << size << endl;
+	// 	int* arr1 = new int[size], * arr2 = NULL, * arr3 = NULL, * arr4 = NULL;
+	// 	fillArray(arr1, size);
+	// 	arr2 = copyArray(arr1, size);
+	// 	arr3 = copyArray(arr1, size);
+	// 	arr4 = copyArray(arr1, size);
 
-		printArray(arr1, size);
-		printArray(arr4, size);
+	// 	printArray(arr1, size);
+	// 	printArray(arr4, size);
 
-		delete[] arr1;
-		delete[] arr2;
-		delete[] arr3;
-		delete[] arr4;
-		break; // REMOVE
-	}
-    return 0;
+	// 	delete[] arr1;
+	// 	delete[] arr2;
+	// 	delete[] arr3;
+	// 	delete[] arr4;
+	// 	break; // REMOVE
+	// }
+    // return 0;
 }
